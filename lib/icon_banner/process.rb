@@ -25,6 +25,10 @@ module IconBanner
       if app_icons.count > 0
         app_icons.each do |icon_path|
           UI.verbose "Processing #{icon_path}"
+          isiOS = false
+          if icon_path.downcase.include? "ios"
+            isiOS = true
+          end
           create_backup icon_path if options[:backup]
 
           color = options[:color]
@@ -34,7 +38,7 @@ module IconBanner
           end unless color
 
           banner_file = Tempfile.new %w[banner .png]
-          generate_banner banner_file.path, label, color, font
+          generate_banner banner_file.path, label, color, font, isiOS
           process_icon icon_path, banner_file.path
           banner_file.close
 

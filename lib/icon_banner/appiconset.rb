@@ -9,7 +9,7 @@ module IconBanner
     PLATFORM = 'iOS'
     PLATFORM_CODE = 'ios'
 
-    def generate_banner(path, label, color, font)
+    def generate_banner(path, label, color, font, useiOSStyle)
       MiniMagick::Tool::Convert.new do |convert|
         convert.size '1024x1024'
         convert << 'xc:transparent'
@@ -22,13 +22,7 @@ module IconBanner
       size = 1024
       font_size = 140 - ([label.length - 12, 0].max * 12)
 
-      isiOS = false
-      puts path
-      if path.downcase.include? "ios"
-        isiOS = true
-      end
-
-      if isiOS
+      if useiOSStyle
         banner.combine_options do |combine|
           combine.fill 'rgba(0,0,0,0.25)'
           combine.draw 'polygon 0,306 0,590 590,0 306,0'
@@ -45,7 +39,7 @@ module IconBanner
         end
       end
 
-      if isiOS
+      if useiOSStyle
         banner.combine_options do |combine|
           combine.fill 'white'
           combine.draw 'polygon 0,306 0,590 590,0 306,0'
