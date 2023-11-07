@@ -20,7 +20,7 @@ module IconBanner
 
       font_size = 140 - ([label.length - 12, 0].max * 12)
       isiOS = false
-      if my_string.downcase.include? "ios"
+      if path.downcase.include? "ios"
         isiOS = true
       end
 
