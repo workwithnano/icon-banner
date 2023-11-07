@@ -18,7 +18,10 @@ module IconBanner
 
       banner = MiniMagick::Image.new path
 
+      # macOS variables
+      size = 1024
       font_size = 140 - ([label.length - 12, 0].max * 12)
+
       isiOS = false
       if path.downcase.include? "ios"
         isiOS = true
